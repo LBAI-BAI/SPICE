@@ -1,0 +1,10 @@
+matplotlib
+pandas
+math
+pickle
+tqdm
+numpy
+seaborn
+multiprocessing
+termcolor
+pyfiglet
