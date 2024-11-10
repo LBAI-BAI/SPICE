@@ -2,6 +2,13 @@
 ## Spatial Pattern Interaction for Cell Exploration
 This program computes a matrix of neighbors from one or multiple FCS files.
 
+### Input format
+This program computes a matrix of neighbors from one or multiple csv files.
+    CSV files must have the following columns:
+        - Centroid X µm
+        - Centroid Y µm     
+        - OmiqFilter
+
 ### Arguments:
 * input: Path to the FCS file or a directory containing multiple FCS files.
 * output: Path to the output directory where results will be saved.

@@ -446,11 +446,15 @@ def display_help():
 
     help = """
 
-
-    This program computes a matrix of neighbors from one or multiple FCS files.
+    This program computes a matrix of neighbors from one or multiple csv files.
+    CSV files must have the following columns:
+        - Centroid X µm
+        - Centroid Y µm     
+        - OmiqFilter
+    
 
     Arguments:
-    * input: Path to the FCS file or a directory containing multiple FCS files.
+    * input: Path to the csv file or a directory containing multiple csv files.
     * output: Path to the output directory where results will be saved.
     * radius_min: Minimum radius used to compute the neighborhood.
     * radius_max: Maximum radius used to compute the neighborhood.
