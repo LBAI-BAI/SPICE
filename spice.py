@@ -61,8 +61,18 @@ def read_cells_from_file(file_name:str) -> list:
     return points
 
 
-def get_cell_to_voisin_multiproc(points, d_min, d_max):
-    """Multiprocessing neigborhood computation"""
+def get_cell_to_voisin_multiproc(points:list, d_min:int, d_max:int) -> dict:
+    """Multiprocessing neigborhood computation
+
+    Args:
+        - points (list) : list of cells to use to perform neigbors computation
+        - d_min (int) : minimum range to be considered as a neigbor
+        - d_max (int) : max range to be considered as a neigbor
+
+    Returns:
+        - (dict) : cell id as key and the list of its neigbors as values, for each cells in points
+        
+    """
     with multiprocessing.Pool() as pool:
         results = pool.starmap(get_cell_to_voisin, [(p1, points, d_min, d_max) for p1 in points])
     cell_to_voisin = {p1: neighbors for p1, neighbors in results}
