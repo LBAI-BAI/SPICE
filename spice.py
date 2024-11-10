@@ -238,8 +238,13 @@ def compute_proximity_matrix_folder(folder, manifest, radius_min, radius_max):
     
 
 
-def display_proximity_matrix(pop_to_voisin):
-    """ """
+def display_proximity_matrix(pop_to_voisin:dict) -> None :
+    """Display proximity matrix
+
+    Args:
+        - pop_to_voisin (dict) : in the form {population : {population : nb_cell}}
+    
+    """
 
     # craft vector list
     vector_list = []
@@ -272,10 +277,14 @@ def display_proximity_matrix(pop_to_voisin):
     plt.show()
    
 
-def generate_proximity_matrix_heatmap(pop_to_voisin, fig_name):
-    """ """
-
-    import numpy as np
+def generate_proximity_matrix_heatmap(pop_to_voisin:dict, fig_name:str) -> None:
+    """ Generate heatmap figure
+    
+    Args:
+        - pop_to_voisin (dict) : in the form {population : {population : nb_cell}}
+        - fig_name (str) : path to save figure file
+    
+    """
 
     # craft vector list
     vector_list = []
@@ -318,8 +327,13 @@ def generate_proximity_matrix_heatmap(pop_to_voisin, fig_name):
 
 
 
-def display_voisin_bar(pop_to_voisins, pop):
-    """ """
+def display_voisin_bar(pop_to_voisins:dict, pop:str) -> None:
+    """ Display bar plot of neigbors for a specific population
+    
+    Args:
+        - pop_to_voisin (dict) : in the form {population : {population : nb_cell}}
+        - pop (str) : population to target
+    """
 
     # load data
     data = pop_to_voisins[pop]
@@ -338,8 +352,14 @@ def display_voisin_bar(pop_to_voisins, pop):
 
 
 
-def display_voisin_pie(pop_to_voisins, pop):
-    """ """
+def display_voisin_pie(pop_to_voisins:dict, pop:str) -> None:
+    """ Display pie chart plot of neigbors for a specific population
+   
+    Args:
+        - pop_to_voisin (dict) : in the form {population : {population : nb_cell}}
+        - pop (str) : population to target
+        
+    """
 
     # load data
     data = pop_to_voisins[pop]
@@ -362,8 +382,14 @@ def display_voisin_pie(pop_to_voisins, pop):
 
 
 
-def display_multiclass_bar(group_to_voisin, pop):
-    """ """
+def display_multiclass_bar(group_to_voisin: dict, pop:str) -> None:
+    """ Display bar chart plor for multiple class
+
+    Args:
+        - group_to_voisin (dict) : in the form {class : {population : {population : nb_cell}}} 
+        - pop (str) : population to target
+    
+    """
 
     data = []
     group_list = []
@@ -403,14 +429,20 @@ def display_multiclass_bar(group_to_voisin, pop):
 
 
     
-def display_class_matrix(group_to_voisin, group):
-    """ """
+def display_class_matrix(group_to_voisin:dict, group:str) -> None:
+    """Display proximity matrix for a specific class
+
+    Args:
+        - group_to_voisin (dict) : in the form {class : {population : {population : nb_cell}}} 
+        - group (str) : class to target
+    
+    """
     pop_to_voisin = group_to_voisin[group]
     display_proximity_matrix(pop_to_voisin)    
 
 
 def display_help():
-    """ """
+    """ Display help message """
 
     help = """
 
@@ -433,9 +465,16 @@ def display_help():
 
 
 
-def run(input, output, radius_min, radius_max):
-    """ """
+def run(input:str, output:str, radius_min:int, radius_max:int) -> None:
+    """ Main function, call by script mode
 
+    Args:
+        - input (str) : path to the input file or folder
+        - output (str) : path to the output folder
+        - radius_min: Minimum radius used to compute the neighborhood.
+        - radius_max: Maximum radius used to compute the neighborhood.
+    
+    """
 
     # init output folder
     if not os.path.isdir(output):
