@@ -15,8 +15,20 @@ from pyfiglet import figlet_format
 import os
 
 
-def get_cell_to_voisin(p1, points, radius_min, radius_max):
-    """List neigboors of cell p1 """
+def get_cell_to_voisin(p1:str, points:list, radius_min:int, radius_max:int):
+    """List neigbors of cell p1
+
+    Args:
+        - p1 (str) : id of the cell that will be the center of the radius (id is suppused be the concatenation of x and y coordinates such as {x}_{y})
+        - points (list) : list of all cells
+        - radius_min (int) : minimum range to be considered as a neigbor
+        - radius_max (int) : max range to be considered as a neigbor
+
+    Returns:
+        - (str) : id of the cell that will be the center of the radius (id is suppused be the concatenation of x and y coordinates such as {x}_{y})
+        - (list) : list of neigbors of point p1
+    
+    """
     neighbors = []
     for p2 in points:
         if p1 != p2:
