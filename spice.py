@@ -153,7 +153,17 @@ def get_cellpop_list_from_folder(folder_file:str) -> list:
     
 
 def compute_proximity_matrix(radius_min: int, radius_max: int, data_file: str) -> dict:
-    """ """
+    """compute matrix of proximity between cell population for a single csv file
+
+    Args:
+        - radius_min (int) : minimum range to be considered as a neigbor
+        - radius_max (int) : max range to be considered as a neigbor
+        - data_file (str) : path to the csv file containing data
+
+    Returns:
+        - (dict) : in the form {population : {population : nb_cell}} 
+    
+    """
 
     # load data
     cell_list = read_cells_from_file(data_file)
@@ -168,7 +178,18 @@ def compute_proximity_matrix(radius_min: int, radius_max: int, data_file: str) -
 
 
 def compute_proximity_matrix_folder(folder, manifest, radius_min, radius_max):
-    """ """
+    """ compute matrix proximity between cell population for each class found in manifest csv file
+
+    Args:
+        - folder (str) : path to the folder containing csv file
+        - manifest (str) : path to the manifest file containing class assignation for each csv file (must contains the columns : 'Groupe')
+        - radius_min (int) : minimum range to be considered as a neigbor
+        - radius_max (int) : max range to be considered as a neigbor
+
+    Returns:
+        - (dict) : in the form {class : {population : {population : nb_cell}}} 
+    
+    """
 
     # ectract class
     class_to_file = {}
