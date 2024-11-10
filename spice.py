@@ -43,7 +43,15 @@ def get_cell_to_voisin(p1:str, points:list, radius_min:int, radius_max:int):
 
 
 def read_cells_from_file(file_name:str) -> list:
-    """Get list of cells in file_name """
+    """Get list of cells in file_name
+
+    Args:
+        - file_name (str) : path to a csv file containing columns 'Centroid X µm' and 'Centroid Y µm'     
+
+    Returns:
+        - (list) : list of cells in the file, defined by tge concatenation of their coordinates {x}_{y}
+
+    """
     points = []
     df = pd.read_csv(file_name)
     for index, row in df.iterrows():
