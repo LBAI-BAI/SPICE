@@ -19,7 +19,7 @@ def get_cell_to_voisin(p1:str, points:list, radius_min:int, radius_max:int):
     """List neigbors of cell p1
 
     Args:
-        - p1 (str) : id of the cell that will be the center of the radius (id is suppused be the concatenation of x and y coordinates such as {x}_{y})
+        - p1 (str) : id of the cell that will be the center of the radius (id is supposed be the concatenation of x and y coordinates such as {x}_{y})
         - points (list) : list of all cells
         - radius_min (int) : minimum range to be considered as a neigbor
         - radius_max (int) : max range to be considered as a neigbor
@@ -49,7 +49,7 @@ def read_cells_from_file(file_name:str) -> list:
         - file_name (str) : path to a csv file containing columns 'Centroid X µm' and 'Centroid Y µm'     
 
     Returns:
-        - (list) : list of cells in the file, defined by tge concatenation of their coordinates {x}_{y}
+        - (list) : list of cells in the file, defined by the concatenation of their coordinates {x}_{y}
 
     """
     points = []
@@ -80,7 +80,14 @@ def get_cell_to_voisin_multiproc(points:list, d_min:int, d_max:int) -> dict:
 
 
 def map_cells_to_pop(data_file:str)->dict:
-    """ """
+    """Assign a cell to its cluster
+
+    Args:
+        - data_file (str) : path to the data file, must contains the columns, 'Centroid X µm', 'Centroid Y µm' and 'OmiqFilter'     
+
+    Returns:
+        - (dict) : cell id as key and associated cluster as values, for each cells data_file
+    """
     cell_to_pop = {}
     df = pd.read_csv(data_file)
     for index, row in df.iterrows():
@@ -93,8 +100,17 @@ def map_cells_to_pop(data_file:str)->dict:
     return cell_to_pop
 
 
-def get_pop_to_voisin(cell_to_voisin, cell_to_pop):
-    """ """
+def get_pop_to_voisin(cell_to_voisin:dict, cell_to_pop:dict) -> dict:
+    """compute cell population to neigbors count (for each cell population)
+
+    Args:
+        - cell_to_voisin (dict) : cell to neighbors
+        - cell_to_pop (dict) : cell to cell type (population, omic cluster or any label)
+
+    Returns:
+        - (dict) : in the form {population : {population : nb_cell}} 
+        
+    """
 
     all_pop_in_file = []
     for pop in list(cell_to_pop.values()):
@@ -114,8 +130,17 @@ def get_pop_to_voisin(cell_to_voisin, cell_to_pop):
             pop_to_voisin[p][pv] += 1
     return pop_to_voisin
 
-def get_cellpop_list_from_folder(folder_file):
-    """ """
+
+def get_cellpop_list_from_folder(folder_file:str) -> list:
+    """Extract all cell pop list from all csv files contained in a folder
+    
+    Args:
+        - folder_file (str) : path to folder containing csv files, csv file must have the column 'OmiqFilter'
+
+    Returns:
+        - (list) : list of extracted cell pop
+    
+    """
     cell_pop_list = []
     for tf in glob.glob(f"{folder_file}/*.csv"):
         df = pd.read_csv(tf)
@@ -127,7 +152,7 @@ def get_cellpop_list_from_folder(folder_file):
     return cell_pop_list
     
 
-def compute_proximity_matrix(radius_min, radius_max, data_file):
+def compute_proximity_matrix(radius_min: int, radius_max: int, data_file: str) -> dict:
     """ """
 
     # load data
